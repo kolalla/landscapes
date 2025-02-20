@@ -1,5 +1,6 @@
 import os
 import shutil
+import random
 from zipfile import ZipFile
 from kaggle.api.kaggle_api_extended import KaggleApi
 
@@ -50,3 +51,39 @@ for img in os.listdir('data/seg_pred/seg_pred'):
     os.remove(f'data/seg_pred/seg_pred/{img}')
 os.rmdir('data/seg_pred/seg_pred')
 os.rmdir('data/seg_pred')
+
+# create validation set
+print('Creating validation folder and moving random train images to validation...')
+
+# set up vars
+train_dir = 'data/train'
+val_dir = 'data/val'
+num_val_samples = 3000
+num_val_samples_per_class = num_val_samples // len(os.listdir(train_dir))
+
+# create validation folder or clean out if it already exists
+if not os.path.exists(val_dir):
+    os.makedirs(val_dir)
+else:
+    shutil.rmtree(val_dir)
+    os.makedirs(val_dir)
+
+for label in os.listdir(train_dir):
+    new_label_dir = os.path.join(val_dir, label)
+    if not os.path.exists(new_label_dir):
+        os.makedirs(new_label_dir)
+
+print(f'Folders in {val_dir}:', os.listdir(val_dir))
+
+# move random train images to validation
+for label in os.listdir(train_dir):
+    train_label_dir = os.path.join(train_dir, label)
+    val_label_dir = os.path.join(val_dir, label)
+
+    imgs = os.listdir(train_label_dir)
+    random.shuffle(imgs)
+
+    for img in imgs[:num_val_samples_per_class]:
+        source_path = os.path.join(train_label_dir, img)
+        target_path = os.path.join(val_label_dir, img)
+        shutil.move(source_path, target_path)
