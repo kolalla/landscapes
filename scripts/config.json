@@ -1,0 +1,11 @@
+{
+    "num_workers": 1,
+    "batch_size": 21,
+    "horizontal_flip": true,
+    "rotation": false,
+    "color_jitter": false,
+    "learning_rate": 0.0052452343684115,
+    "dropout": 0.1982044830250564,
+    "optimizer": "SGD",
+    "num_epochs": 119
+}
