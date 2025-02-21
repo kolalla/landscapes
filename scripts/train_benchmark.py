@@ -20,34 +20,37 @@ with open('data/tabular_datasets.pkl', 'rb') as f:
 image_datasets = torch.load('data/image_datasets.pth', weights_only=False)
 class_names = image_datasets['class_names']
 
-# # Perform PCA to generate features
+# Perform PCA to generate features
+n_components = int(tabular_datasets['train'][1].shape[0]/2)
+pca = PCA(n_components=n_components)
+print(f'Performing PCA with {n_components} components...\n')
 # pca_datasets = {}
-# pca = PCA(n_components=1000)
-
-# for subset in ['train', 'val', 'test']:
+# for subset in ['train', 'val']:
 #     pca.fit(tabular_datasets[subset][0])
 #     pca_datasets.update({subset: (
 #         pca.transform(tabular_datasets[subset][0]), 
 #         tabular_datasets[subset][1]
 #     )})
 
-# print(
-#     f'Train PCA shape: {pca_datasets["train"][0].shape}\n'
-#     f'Val PCA shape: {pca_datasets["val"][0].shape}\n'
-#     f'Test PCA shape: {pca_datasets["test"][0].shape}'
-# )
-
-# # Set up pca data
-# X_train, y_train = pca_datasets['train']
-# X_val, y_val = pca_datasets['val']
-
-X_train, y_train = tabular_datasets['train']
-X_val, y_val = tabular_datasets['val']
+# Set up pca data
+X_train = pca.fit_transform(tabular_datasets['train'][0])
+y_train = tabular_datasets['train'][1]
+X_val = pca.transform(tabular_datasets['val'][0])
+y_val = tabular_datasets['val'][1]
 
 print(
-    f'X Train shape: {X_train.shape}\n'
-    f'X Val shape: {X_val.shape}\n'
+    f'PCA Complete - Time elapsed: {(time.time()-start)/60:.2f} minutes\n'
+    f'Train PCA shape: {X_train.shape}\n'
+    f'Val PCA shape: {X_val.shape}\n'
 )
+
+# X_train, y_train = tabular_datasets['train']
+# X_val, y_val = tabular_datasets['val']
+
+# print(
+#     f'X Train shape: {X_train.shape}\n'
+#     f'X Val shape: {X_val.shape}\n'
+# )
 
 # Create GPU-compatible DMatrix
 dtrain = xgb.QuantileDMatrix(X_train, label=y_train)
