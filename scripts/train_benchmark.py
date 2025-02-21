@@ -24,13 +24,6 @@ class_names = image_datasets['class_names']
 n_components = int(tabular_datasets['train'][1].shape[0]/2)
 pca = PCA(n_components=n_components)
 print(f'Performing PCA with {n_components} components...\n')
-# pca_datasets = {}
-# for subset in ['train', 'val']:
-#     pca.fit(tabular_datasets[subset][0])
-#     pca_datasets.update({subset: (
-#         pca.transform(tabular_datasets[subset][0]), 
-#         tabular_datasets[subset][1]
-#     )})
 
 # Set up pca data
 X_train = pca.fit_transform(tabular_datasets['train'][0])
@@ -43,14 +36,6 @@ print(
     f'Train PCA shape: {X_train.shape}\n'
     f'Val PCA shape: {X_val.shape}\n'
 )
-
-# X_train, y_train = tabular_datasets['train']
-# X_val, y_val = tabular_datasets['val']
-
-# print(
-#     f'X Train shape: {X_train.shape}\n'
-#     f'X Val shape: {X_val.shape}\n'
-# )
 
 # Create GPU-compatible DMatrix
 dtrain = xgb.QuantileDMatrix(X_train, label=y_train)
