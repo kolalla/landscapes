@@ -1,4 +1,5 @@
 # landscapes
+
 ### Image headline classification using residual networks  
 This project aims to classify landscape images into one of six categories. The data consist of over 14,000 labelled images, initially gather by Intel as part of a competition with Analytics Vidhya: Datahack [1]. The primary model under consideration is ResNet50 [2].
 
@@ -23,6 +24,10 @@ This script provides details on errors in the most recently trained models. It g
 
 `tuning.py`  
 This script iterates through various configurations of hyperparameters and logs the models' resulting performance for comparison, under the `logs` directory. The script leverages the Optuna library.
+
+The `environment.yaml` can be used to generate a conda env with the libraries required to run these scripts.
+
+------------
 
 Sources  
 [1] Intel and Analytics Vidhya: Datahack. "Intel Image Classification Challenge." Sourced from https://www.kaggle.com/datasets/puneet6060/intel-image-classification.  

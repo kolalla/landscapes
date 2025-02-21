@@ -74,7 +74,6 @@ if __name__ == '__main__':
             num_files += len(os.listdir(f'data/{subset}/{folder}'))
         print(f'Number of {subset} files: {num_files}')
 
-    
     print('\nPreprocessing images for ResNet50...')
     image_datasets, dataloaders, dataset_sizes, class_names = preprocess_resnet()
 
