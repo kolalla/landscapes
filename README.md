@@ -1,4 +1,5 @@
-News headline classification using Pretrained LLMs
+# landscapes
+Image headline classification using residual networks
 This project aims to classify landscape images into one of six categories. The data consist of over 14,000 labelled images, initially gather by Intel as part of a competition with Analytics Vidhya: Datahack [1]. The primary model under consideration is ResNet50 [2].
 
 Below is a description of the various scripts (all saved under the scripts folder). Configuration is handled via the `scripts/config.json` file. The overview.ipynb provides an end-to-end view of the development procedure, covering exploratory data analysis, benchmark and baseline training, tuning for performance, and final evaluation.
