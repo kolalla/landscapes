@@ -25,5 +25,5 @@ This script provides details on errors in the most recently trained models. It g
 This script iterates through various configurations of hyperparameters and logs the models' resulting performance for comparison, under the `logs` directory. The script leverages the Optuna library.
 
 Sources  
-[1] Intel and Analytics Vidhya: Datahack. "Intel Image Classification Challenge." Sourced from https://www.kaggle.com/datasets/puneet6060/intel-image-classification.
-[2] Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun. "Deep Residual Learning for Image Recognition". December 2015. https://arxiv.org/abs/1512.03385.
+[1] Intel and Analytics Vidhya: Datahack. "Intel Image Classification Challenge." Sourced from https://www.kaggle.com/datasets/puneet6060/intel-image-classification.  
+[2] Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun. "Deep Residual Learning for Image Recognition". December 2015. https://arxiv.org/abs/1512.03385.  
